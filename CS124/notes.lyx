@@ -1,0 +1,425 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+CS 124 Operating Systems and Masochism
+\end_layout
+
+\begin_layout Part*
+Monday, January 4
+\end_layout
+
+\begin_layout Standard
+Books are optional
+\end_layout
+
+\begin_layout Standard
+We use git
+\end_layout
+
+\begin_layout Standard
+CS 24 is hard prerequisite.
+\end_layout
+
+\begin_layout Standard
+Teams can't share code to other teams, but can collaborate with other teams
+ and debugging help
+\end_layout
+
+\begin_layout Standard
+Don't look up the answers because Pintos has existed for a while
+\end_layout
+
+\begin_layout Standard
+Can look at other sources esp for Linux implementation, but can't copy it.
+ But can read and understand it.
+ Cite these sources.
+ 
+\end_layout
+
+\begin_layout Standard
+Thursdays at 2am is due date.
+ 
+\end_layout
+
+\begin_layout Standard
+Teams have 4 late tokens.
+ Tokens are just like CS24 tokens.
+ Can also ask for extensions.
+ 
+\end_layout
+
+\begin_layout Standard
+Gunna use a 32bit Mint Linux.
+ Virtual OS's are dependent on host computer bc fuck you.
+ 
+\end_layout
+
+\begin_layout Subsection
+What is an Operating System?
+\end_layout
+
+\begin_layout Standard
+Controls access to system's resources and expose access
+\end_layout
+
+\begin_layout Standard
+Standardized interface between hardware and applications.
+ Obvious why we want standardized access lawl
+\end_layout
+
+\begin_layout Standard
+allocation and sharing of these resources.
+ Have to govern who owns what and when.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Examples of Storage
+\series bold
+what really is a file system format?
+\end_layout
+
+\begin_layout Standard
+Optical Disks
+\end_layout
+
+\begin_layout Standard
+Flash memory
+\end_layout
+
+\begin_layout Standard
+NAS
+\end_layout
+
+\begin_layout Standard
+Internal HD
+\end_layout
+
+\begin_layout Standard
+RAID arrays
+\end_layout
+
+\begin_layout Standard
+SCSI
+\end_layout
+
+\begin_layout Standard
+Older HDDs work differently, but we want to access them the same way
+\end_layout
+
+\begin_layout Standard
+CHS and later LBA for allocating sectors on a HDD
+\end_layout
+
+\begin_layout Standard
+Different storage disks require different maintenance.
+ 
+\end_layout
+
+\begin_layout Standard
+Fragmention, (SSDs can't erase small chunks.
+ reading can affect write speed), (SSDs have limits on how mnay times to
+ write to a sector)
+\end_layout
+
+\begin_layout Standard
+OS needs to be smart about how it deals with those two.
+\end_layout
+
+\begin_layout Standard
+Different devices have different formats, extN, FAT32, NTFs etc.
+ 
+\series bold
+what really is a file system format?
+\end_layout
+
+\begin_layout Standard
+Applications don't care about the type of device because they use write
+ and read.
+ The OS has to deal with that shit
+\end_layout
+
+\begin_layout Standard
+Easy to access the drives using virtual file systems
+\end_layout
+
+\begin_layout Standard
+interface with pipes and sockets etc.
+ just use the same interface.
+ so printf, scanf etc.
+\end_layout
+
+\begin_layout Standard
+the difference is in how to open the device
+\end_layout
+
+\begin_layout Standard
+what if multiple processes want to access the same file
+\end_layout
+
+\begin_layout Standard
+what if you delete a file that is open.
+ directory entry is removed, but the data isn't reclaimed until nothing
+ references it.
+ so no one can open it, but the program that has it open keeps it.
+ Windows instead just prevents deletion.
+ OS is the arbiter
+\end_layout
+
+\begin_layout Subsubsection
+History of OS
+\end_layout
+
+\begin_layout Standard
+originally computers were mainframes
+\end_layout
+
+\begin_layout Standard
+you would physically add the punchcards.
+ then results printed out on accordian paper
+\end_layout
+
+\begin_layout Standard
+a lot of time is spent waiting for the operator to add stuff.
+ can't do computing while cards are being read and for the printer.
+ CPU is taking a lot of breaks.
+ we want to go flaster.
+ 
+\end_layout
+
+\begin_layout Standard
+decided to batch jobs.
+ data can get put onto a tape.
+ then mainframe can take the tape., you make a tape with cheaper computers.
+ then printing is done from an output tape so a cheaper computer can do
+ the printing.
+ 
+\end_layout
+
+\begin_layout Standard
+tape is bad for random access.
+ even worse than disk.
+ seeking takes a while.
+ so we want to do work while we are waiting on I/O.
+ this is multiprogramming.
+ multiple programs all in memory at the same time.
+\end_layout
+
+\begin_layout Standard
+now programs have to share memory.
+ each program shouldn't be able to break another program's data.
+ process isolation.
+ want virtual memory and differences in what CPU is allowed to do so a prgoram
+ can't hack into kernal mode.
+ 
+\end_layout
+
+\begin_layout Standard
+debugging sucked because it took hours before batching and shit before it
+ even allowed you to know you had a syntax error.
+ so you get a timeshare on the computer to get a terminal.
+ 
+\end_layout
+
+\begin_layout Standard
+now we get multiple users, so now we have to schedule processes through
+ multiple users on top of the multiple things each is trying to do.
+\end_layout
+
+\begin_layout Standard
+user is slower than computer so we want multiple users to utilize the cpu.
+ but the problem is that you have to keep users apart from haX0ring each
+ other.
+\end_layout
+
+\begin_layout Standard
+computers get cheaper, so smaller groups end up with computers.
+ eventually people want to work on black boxes rather than understand things.
+ this is where GUI comes into being because we don't want to teach terminal
+ shit to everyone.
+ 
+\end_layout
+
+\begin_layout Standard
+now we have multiple processes per computer.
+ Physics is sad because we can't beat lightspeed for speed.
+ gotta have multiple to continue cheating light.
+\end_layout
+
+\begin_layout Standard
+these multiple processor stuff needs to be handeled by OS.
+ before we had only one thing going on at once.
+ with multiple processes things get more complicated.
+ now we emulate processors on processors.
+ host virtual OS.
+ 
+\end_layout
+
+\begin_layout Standard
+emulation - we emulate a different CPUs instructions.
+ slower, but still can run programs for different chip set wtf?
+\end_layout
+
+\begin_layout Standard
+virtualization - guest operating system.
+ if CPU is built rigfht, then we have hardware virtualization and it sa
+ lot faster.
+ 
+\end_layout
+
+\begin_layout Standard
+hypervisor rather than supervisor manages the guest OS.
+ acts kinda like an OS.
+ its an OS for OS's.
+ gives access to hardware to the different OS's running on the same machine
+\end_layout
+
+\begin_layout Standard
+file system caching makes guest and host fight, so hypervisor needs to handle
+ that to make things still running smoothly.
+ 
+\series bold
+thats pretty cool
+\end_layout
+
+\begin_layout Standard
+guests expect to access hardware and since they have a pipe through the
+ host, the hypervisor provies a mask to make the guest think it is running
+ directly on the hardware
+\end_layout
+
+\begin_layout Standard
+hypervisor has to receive the page faults for these caching and figure out
+ what its going to do.
+\end_layout
+
+\begin_layout Standard
+different contexts require different things of the OS.
+ PC wants to be responsive.
+ mainframe wants to not waste cycles.
+ phones need to manage battery life.
+\end_layout
+
+\begin_layout Subsubsection
+Real-time operating systems
+\end_layout
+
+\begin_layout Standard
+things must be done by particular deadlines.
+ the realtime support usually occurs in regular OSs and its soft reall-time
+ support.
+ you are sad if the deadline is missed, but system won't crash, hard real-time
+ system CRASH on failure
+\end_layout
+
+\begin_layout Standard
+for example if you are managing robot arms on an assembly line, if you are
+ delayed you might weld the wrong piece on the line.
+ if you mess up, it ruins cars and the line has to be shut down so that
+ you can reset.
+\end_layout
+
+\begin_layout Standard
+moodle key =kthread
+\end_layout
+
+\begin_layout Part*
+Wednesday, January 6
+\end_layout
+
+\begin_layout Subsection*
+Components of Operating Systems
+\end_layout
+
+\begin_layout Standard
+Users want to use the hardware.
+ OS might restrain the number of users.
+ Computer's in cars only have a user when a mechanic interfaces with it,
+ so usually 0 users.
+ 
+\end_layout
+
+\begin_layout Standard
+Applications are programs the user uses.
+ depends on OS provisions.
+ Some applications come from the operating system -- gui, CLI, some services.
+ network managing, firewall etc.
+ system applications live outside of the OS proper, and user applications
+ live on top of those -- browsers, MS word etc.
+ they interact with OS and system applications.
+\end_layout
+
+\begin_layout Standard
+Operating System has program execution.
+ has to handle programs that fail and know which ones to turn on.
+ Resource allocation -- heap, hardware, cpu time, 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+dynamic vs static linking.
+ what is this?
+\end_layout
+
+\end_body
+\end_document

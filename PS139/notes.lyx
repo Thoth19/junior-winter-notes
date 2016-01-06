@@ -1,0 +1,230 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+PS 139 Notes
+\end_layout
+
+\begin_layout Part*
+Tuesday, January 5
+\end_layout
+
+\begin_layout Standard
+Groups of 3 or 4
+\end_layout
+
+\begin_layout Standard
+There are two books, so he wants us to get them because he gets paid ~30
+ cents per book we buy ...
+\end_layout
+
+\begin_layout Standard
+origin of the course.
+ used to be two courses about voter fraud and stuff
+\end_layout
+
+\begin_layout Standard
+ordeshok ended up doing work in ukraine and russia.
+ got to use ukraine as a labratory in 2004
+\end_layout
+
+\begin_layout Standard
+two candidates for presidential election.
+ if >50% you win, otherwise runoff.
+ 
+\end_layout
+
+\begin_layout Standard
+had dinner with putin's vote manipulator mastermind in ukraine.
+ he didn't want to tip his hand by having fraud on the first round, but
+ lots of things were fishy in second election.
+ >100% turnout, 100% for putin's candidate etc.
+\end_layout
+
+\begin_layout Standard
+scandanavia refuses to recognize the election.
+ same with canada.
+ eventually US also refuses to recognize.
+ eventually there is a re-runoff to fix the problems.
+\end_layout
+
+\begin_layout Standard
+young people went to become election monitors.
+ from US and stuff.
+ putin abandoned his candidate because too much fraud attached to him now.
+ 
+\end_layout
+
+\begin_layout Standard
+only thing that changed from october to november was ability to commit fraud
+ and desire to do so.
+ so now we can develop statistical tools to take a look at this.
+ 
+\end_layout
+
+\begin_layout Standard
+simmilar great experiments in russia.
+ we know which areas are likely to not vote for putin so ...
+ (ie putin wants them dead and they vote for him?) 
+\end_layout
+
+\begin_layout Standard
+in the background we also have the 2000 election -- specifically Florida.
+ very very little fraud in the united states.
+ one because very little fraud and two because politicians have been doing
+ fraud in US for 200 years so they're getting good.
+ and sometimes dont need fraud (make the lines longer by making fewer polling
+ places) (decentralized election process.
+ so can register to vote in multiple states would be hard to track.
+ counties would have problems finding out that you cheated them because
+ they are usually poorly run)
+\end_layout
+
+\begin_layout Standard
+the other reason for this class also came from russian work in the 90s.
+ tech got a russian guy to teach russian politics.
+ ordeshok gets invited to moscow to talk about constitutional design.
+ russians thought about it legalitically, and he wanted to use game theoretic
+ stuff.
+ how do you incentivize things that you want to happen? ordeshok wants to
+ make it federalist.
+ russians dont know how to do to, and claims probably no one does.
+ has anyone studied it yet? federal and decentralized systems are different.
+ if you decentralize poorly there's chaos.
+\end_layout
+
+\begin_layout Standard
+project has to be in on time this year.
+ too many I/E's last year
+\end_layout
+
+\begin_layout Standard
+Look at the elcetion laws in the country.
+ sometimes its weird.
+ in South Africa they typically have >100% turnout because absentee ballots
+ are counted where you are not where you got them from.
+ In Taiwan there's some weird stuff as well.
+\end_layout
+
+\begin_layout Standard
+we expect homogineity.
+ and then look for differences.
+ look at things that should affect the data -- socieo economic factors,
+ millitary etc.
+ want to control for the non-homogeneity, so the remainder is fraud.
+ we might want to look at czech cities.
+ need that to avoid misinterpretting data.
+\end_layout
+
+\begin_layout Standard
+Stalin Doctrine -- stalin killed people in the 30s and 40s.
+ Would issue edicts of how many people were to be killed.
+ he'd delegate this to political bosses.
+ they knew that all bosses eventually got killed.
+ they want to support stalin super hard so they don't die.
+ so they become 
+\begin_inset Quotes eld
+\end_inset
+
+enthusiastic,
+\begin_inset Quotes erd
+\end_inset
+
+ workers, so political elite race to kill more people than their fellows.
+ exceeded quotas by 3-4x
+\end_layout
+
+\begin_layout Standard
+putin appointed regional government rather than elected, much like stalin.
+ thus they compete to steal more votes for putin in the next election.
+ just like before but now with vots and not bodies.
+\end_layout
+
+\begin_layout Standard
+Illinios were releasing returns slowly in the 60s because both groups are
+ trying to fraud each other.
+ they slowly release returns to figure out how much they need to fraud.
+ can't steal 5% in the US, can only steal about 1%, so they need to figure
+ out how close the vote is, so can we steal the election? so it would take
+ forever for the results to come in.
+ 
+\end_layout
+
+\begin_layout Standard
+more like prosecuting attorney than a dectetive.
+ heory of the crime and then look for evidence that backs you up.
+ you know there is a defense attorney that is trying to explain the data
+ differently or using different data
+\end_layout
+
+\begin_layout Standard
+Next week, we sign up for groups and countries and stuff
+\end_layout
+
+\begin_layout Standard
+we also have to present at the end of term.
+ 10 min presentations.
+ so we want to go at the beginning because the expectation is lower for
+ peopel going in the beginning.
+\end_layout
+
+\end_body
+\end_document
