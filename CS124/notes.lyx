@@ -365,7 +365,7 @@ Real-time operating systems
 
 \begin_layout Standard
 things must be done by particular deadlines.
- the realtime support usually occurs in regular OSs and its soft reall-time
+ the realtime support usually occurs in regular OSs and its soft real-time
  support.
  you are sad if the deadline is missed, but system won't crash, hard real-time
  system CRASH on failure
@@ -411,7 +411,111 @@ Applications are programs the user uses.
 \begin_layout Standard
 Operating System has program execution.
  has to handle programs that fail and know which ones to turn on.
- Resource allocation -- heap, hardware, cpu time, 
+ Resource allocation -- heap, hardware, cpu time.
+ Filesystem, IO services, Communication, Accounting, Error detection, processor
+ failure (happens infrequently)
+\end_layout
+
+\begin_layout Standard
+OS also needs protection against abuses.
+ sometimes malicious code is external and sometimes internal, so applications
+ shouldn't touch OS data strcutures or OS code.
+ all interactions with OS happen through system calls.
+ processes should only access each other's data unless both programs allow
+ this.
+ 
+\end_layout
+
+\begin_layout Standard
+Protection is done at least through two methods: multiple processor modes
+ (kernel mode--full access to all processor capabilities, and user mode-only
+ restricted set of capabilities).
+ kernel is the stuff run in kernel mode.
+ OS might have other components in user mode.
+ sometimes we have more processor modes that are nested, like the slide
+ from CS24.
+ Also need Virtual Memory.
+ OS controls mapping of virtual Memory to physical addresses.
+ typically done with page tables.
+ applications can't touch the MMU or page tables.
+ kernel protects those things.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Console and File IO
+\end_layout
+
+\begin_layout Standard
+input and output streams typically go and from the console.
+ can have a command piping into another command, write to a file, /dev/null
+ and /dev/random.
+ (sending data to dev/null speeds us up bc less IO)
+\end_layout
+
+\begin_layout Standard
+input and output are done with system calls.
+ 
+\end_layout
+
+\begin_layout Standard
+we return signed version of size_t.
+ 
+\series bold
+what happens if the nubmer is too big???
+\end_layout
+
+\begin_layout Standard
+user programs don't write to files, they ask OS to r/w to the file.
+ this takes a while, so we typically context switch so cpu can still be
+ working.
+ 
+\end_layout
+
+\begin_layout Standard
+filedes is a integer key that tells us which file we are talking about.
+ the file struct has all these files and filedes is an index into this array.
+ the file struct has data about how to deal with that file.
+ ie seek to end, and some other crap.
+\end_layout
+
+\begin_layout Standard
+kernel is the one to touch that struct even though it is individual to each
+ process.
+ 
+\end_layout
+
+\begin_layout Standard
+file ops use function pointers so that we have the same api even though
+ we might be using files, sockets, pipes, console input etc.
+ 
+\end_layout
+
+\begin_layout Standard
+this also means multiple processes can modify the same file at once.
+ esp if they are using different offsets.
+ 
+\end_layout
+
+\begin_layout Standard
+child processes start in the same state as parent, so point to same open
+ files.
+ need to redirect output AFTER forking so as not to mess up the command
+ shell.
+\end_layout
+
+\begin_layout Standard
+process needs to change file descriptors, but has to ask kernel to do it.
+ dup and dup2.
+ the former tries to make a new one with lowest value possible.
+ need to call close on each descriptor because we don't lose the file until
+ reference count = 0
+\end_layout
+
+\begin_layout Standard
+dup2 lets you specify which descriptor to dump into.
+ this is how you replace stdin/out by replacing it this way.
+ then close fd.
 \end_layout
 
 \begin_layout Standard
