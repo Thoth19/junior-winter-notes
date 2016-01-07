@@ -222,7 +222,305 @@ high variaince implies underfitting and high bias is ovrefittting
 \end_layout
 
 \begin_layout Standard
+cross validation is the idea od trying out the differetn models and testing
+ on the last bit of traiing data rather than training on it.
+ then we chose the best model
+\end_layout
 
+\begin_layout Part*
+Thursday, January 7
+\end_layout
+
+\begin_layout Subsection
+Perceptron
+\end_layout
+
+\begin_layout Standard
+early powerful ML approach
+\end_layout
+
+\begin_layout Standard
+fast, clean and like neural networks
+\end_layout
+
+\begin_layout Standard
+start with a model, chose random values from training set.
+ if our model would work ie classifies correctly, we leave it alone, otherwise
+ we make it different to be closer to the one that we had as an issue.
+ 
+\end_layout
+
+\begin_layout Standard
+a hyperplane (line in the 2d case) it is describd by 
+\begin_inset Formula $(w,b)$
+\end_inset
+
+where 
+\begin_inset Formula $w$
+\end_inset
+
+ is 
+\begin_inset Formula $d$
+\end_inset
+
+ dimensional and 
+\begin_inset Formula $b$
+\end_inset
+
+ is the scalar bias.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $distance=\frac{|w^{T}x-b|}{||w||}$
+\end_inset
+
+ and the signed distance is where we remove the absolute value.if we didn't
+ normalize, we would have the linear mode, ie 
+\begin_inset Formula $w^{T}x-b$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+example (with bias ignored)
+\end_layout
+
+\begin_layout Standard
+we win when no more updates are made -- so we could just look through all
+ of the training data and know we are done.
+ thoughits also m=possible that we get oscillations and never terminate.
+ 
+\end_layout
+
+\begin_layout Standard
+serperating hyperplane.
+ all of the correct ways to divide the two groups form a seperating hyperplane.
+ 
+\end_layout
+
+\begin_layout Standard
+a training set is linearly seperable only if there exists a hyperplane that
+ is mistake free between the two groups
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\gamma=margin=\mbox{\frac{y(w^{T}x)}{|w|}}$
+\end_inset
+
+ we want to maximize the minimum distance.
+ 
+\end_layout
+
+\begin_layout Standard
+linearly seperable iff 
+\begin_inset Formula $\gamma>0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If the problem is linearly seperable, then the number of mistakes is bounded
+ by 
+\begin_inset Formula $R^{2}/\gamma^{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $R=max||x||$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is the margin.
+ More compact representation fewer mistakes.
+ larger margin implies fewer mistakes.
+\end_layout
+
+\begin_layout Standard
+Most problems are not actually linearly seperable, so the perceptron might
+ never converge.
+ one way to avoid this problem is to keep comparing proposed functions on
+ a validation set.
+ pick the best function defined by how well it did on the validation set.
+ that or stop continuing after accuracy starts to drop.
+ called early stopping.
+ can also stop after a fixed number of passes and choose best out of those.
+ 
+\end_layout
+
+\begin_layout Standard
+online learning vs batch learning
+\end_layout
+
+\begin_layout Standard
+online learning is defined by getting a stream of data, not all at once.
+ can only modify and update.
+ perceptron is an example
+\end_layout
+
+\begin_layout Standard
+batch learning says that we have all of the data at once.
+ then we make a single update based on all of the data simaltaneously
+\end_layout
+
+\begin_layout Standard
+can always use online learning on batch learning problem because we can
+ stream the data.
+ Can't do the reverse typically.
+ 
+\end_layout
+
+\begin_layout Standard
+However, its not always a good model and sometimes doesn't even converge.
+ 
+\end_layout
+
+\begin_layout Subsection
+Gradient Descent
+\end_layout
+
+\begin_layout Standard
+optimizing objective functions
+\end_layout
+
+\begin_layout Standard
+want to minimize the loss function.
+ 
+\end_layout
+
+\begin_layout Standard
+gradient of loss function.
+ looks just like the HW problem.
+ its on the slides
+\end_layout
+
+\begin_layout Standard
+if we leave the step size 
+\begin_inset Formula $\eta$
+\end_inset
+
+ the same, then we can oscillate infinitely.
+ if we make 
+\begin_inset Formula $\eta$
+\end_inset
+
+ much smaller it will take a while, but we can make the bounds much closer
+ before oscillation takes over.
+\end_layout
+
+\begin_layout Standard
+so we want the step size to be as large as possible without causing divergence.
+ 
+\end_layout
+
+\begin_layout Standard
+if we have the same optimization problem but scale the loss function up
+ by a constant factor.
+ 
+\end_layout
+
+\begin_layout Standard
+divide the loss function by the number of examples.
+ then we can have step sizes on the same scale as other problems.
+ start with large step size and once the loss plateus, divide the step size
+ by some other nubmer.
+ 
+\series bold
+in order to get to the global optimum, the step size must change
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+convex functions.
+ easy to find their global minimum bc every local minimum is global.
+\end_layout
+
+\begin_layout Standard
+download new copies of the slide beause there will be a typo update.
+ 
+\end_layout
+
+\begin_layout Standard
+how fast can we get within 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ of the optimal loss? 
+\end_layout
+
+\begin_layout Standard
+some of these functions can be super fast.
+ 
+\begin_inset Formula $O(1/\epsilon^{2})$
+\end_inset
+
+is the worst one.
+ but the fast ones are 
+\begin_inset Formula $O(log(1/\epsilon))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+there are a number of stopping strategies.
+ when validation error stops going down, after a number of iterations, after
+ a certain about of time etc.
+\end_layout
+
+\begin_layout Standard
+the problem with gradient descent is that it requires summing over the entire
+ training set every time which is super expensive.
+ we need to page in data from HDD because you sohuld have more data than
+ RAM.
+ so maybe we only need to pass over part of the data.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Stochastic Gradient Descent
+\end_layout
+
+\begin_layout Standard
+we want to avoid passing over everything because that's too much.
+\end_layout
+
+\begin_layout Standard
+what if the loss function decomposes additively.
+ 
+\end_layout
+
+\begin_layout Standard
+mini-batch SGD.
+ get a component function per batch of training examples.
+ this let's us use vectors to do tihngs faster, and it has less effect on
+ the function every time so it decreases volitility.
+ is also pretty parrallelizeable.
+ 
+\end_layout
+
+\begin_layout Standard
+must be divided up randomly.
+ and need a data set large enough.
+ doing the batching differently will affect the answer, but that answer
+ will still be in the 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ball.
+\end_layout
+
+\begin_layout Standard
+the loss function for a single training example.
+ only update when the sign of the label is wrong.
+ perceptron algorithm implicitly does SGD with this particular loss function
+ and step size of one.
 \end_layout
 
 \end_body
