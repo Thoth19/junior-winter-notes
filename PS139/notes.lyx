@@ -226,5 +226,157 @@ we also have to present at the end of term.
  peopel going in the beginning.
 \end_layout
 
+\begin_layout Part*
+Thursday, January 7
+\end_layout
+
+\begin_layout Standard
+Grades are basically the papers go into two piles A and B.
+ and there are more As than Bs.
+\end_layout
+
+\begin_layout Standard
+Still more from the story FTS
+\end_layout
+
+\begin_layout Standard
+Oh man benford's law
+\end_layout
+
+\begin_layout Standard
+match the number vs the first digit.
+ hey look its all logarithmic.
+ gasp.
+ 
+\end_layout
+
+\begin_layout Standard
+no theoretical reason why this is true for populations of bugs.
+ similar graph for corporation sales data.
+\end_layout
+
+\begin_layout Standard
+so the voter data in russia had a different slope from normal benford's
+ law and that points to fraud.
+ but uhh there's no thoeretical basis so its pretty poor.
+\end_layout
+
+\begin_layout Standard
+so he looks at more stuff.
+\end_layout
+
+\begin_layout Standard
+may day parade -- all of the big whigs were lined up by lenin's tomb to
+ watch.
+ there were no women.
+ apparently women's lib was worse in USSR
+\end_layout
+
+\begin_layout Standard
+USSR didn't produce tampex.
+ soviet women that found out about this were very pissed.
+\end_layout
+
+\begin_layout Standard
+village women wish they had been in US retiring to florida.
+\end_layout
+
+\begin_layout Standard
+very very few political parties paid attention to women, so if you cater
+ to them, you can get elected super fast.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+a rose for every woman.
+\begin_inset Quotes erd
+\end_inset
+
+ not fraud, just tapping an issue
+\end_layout
+
+\begin_layout Standard
+He's now showing a power point that I'll add to the github.
+\end_layout
+
+\begin_layout Standard
+Soviet's try to make voting a holiday, so they gave out cheerios.
+\end_layout
+
+\begin_layout Standard
+also he got to put a vote in the box.
+ suuuper high security right? XD
+\end_layout
+
+\begin_layout Standard
+russia wants high voter turnout so they know what the voter's want.
+ but that's what public opinion polls are for.
+\end_layout
+
+\begin_layout Standard
+relationship between observed turnout and share of vote for vs against.
+ basically more turnout implies that a higher percentage like a particular
+ candidate.
+\end_layout
+
+\begin_layout Standard
+E.g.: So we start with 100 people with 80-20 split.
+ If only fifty vote, we assume that we end up with 40-10.
+ vote against fit the pattern just fine, but as turnout increased, people
+ voted against the referendum.
+ Can't reject the hpyothesis that you have homogenuous data and variation
+ in turnout was inflated by the polling stations.
+ and the artificially added voters were against the new constitutions because
+ the local bureacrats are ex-communists and like being in charge.
+ don't like new things.
+\end_layout
+
+\begin_layout Standard
+aggregation error.
+ 
+\end_layout
+
+\begin_layout Standard
+sometimes peculiar things happen naturally.
+ and sometimes because fudged data.
+ have to figure out which is which.
+\end_layout
+
+\begin_layout Standard
+technology means we can take pictures of votes, so buying votes is enforceable.
+ if two sides of an election, then both sides will claim fraud or no fraud
+ depending on who won.
+ plenty of groups that look for fraud can also be bought.
+ 
+\end_layout
+
+\begin_layout Standard
+new parties need to hit 3%.
+ if they realize that they aren't going to make 3%, they cheat the remainder
+ of the votes for that minority into another allied party.
+ steal votes from oneself.
+ because collition government.
+ alternatively give up some of your own votes to get your allies into 3%.
+ if you lose some of your own you might lose a seat, but the 3% allied party
+ once it hits that threshold will get you maybe 15 allied seats in the gov.
+\end_layout
+
+\begin_layout Standard
+always going to be inconsistent data.
+ looking for motive.
+ just like a criminal investigation.
+ sometimes the fraudsters screw up.
+ (ie when had to steal from themselves to give to coalition partner).
+\end_layout
+
+\begin_layout Standard
+data indicates that republicans stole votes in cinncinnati for decades.
+ usually we see repressing black voters.
+ how did this come up now if they've been stealing votes for 20 years.
+ -- 5 presidential elections.
+ why? hamilton county is a weird county.
+ 
+\end_layout
+
 \end_body
 \end_document
