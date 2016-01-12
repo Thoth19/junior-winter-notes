@@ -525,5 +525,405 @@ dynamic vs static linking.
  what is this?
 \end_layout
 
+\begin_layout Part*
+Friday, January 8
+\end_layout
+
+\begin_layout Standard
+Need to be better at splitting up work.
+ Probably want to halphalp documentation.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Hardware
+\end_layout
+
+\begin_layout Standard
+What hardware is necessary for an Operating System.
+ and what support is necessary?
+\end_layout
+
+\begin_layout Standard
+in DOS you could directly talk to the OS.
+ 
+\end_layout
+
+\begin_layout Standard
+applications get to kernel mode using a trap.
+ send signals to OS so you can access kernel space data.
+ traps and hardware interrupts can't return to same place, but always next
+ instruction.
+ 
+\end_layout
+
+\begin_layout Standard
+OS addresses can change when OS is updated, so appliations shouldn't use
+ hardcoded values, but the OS trap mechanism.
+ since there is a single entry point, it can be safer so the OS can manage
+ these nicely.
+ 
+\end_layout
+
+\begin_layout Standard
+in IA32, different operating modes have different stacks so it insulates
+ the kernel stack from the application screwing up.
+ 
+\end_layout
+
+\begin_layout Standard
+syscall wrappers exist, so we don't actualyl ususlaly need to deal with
+ the true eax register and syscalls.
+\end_layout
+
+\begin_layout Standard
+boots into kernel mode so that the OS can start up some things and then
+ dispatch to usermode.
+ 
+\end_layout
+
+\begin_layout Standard
+exceptional control flow.
+ traps, interrupts, faults, aborts.
+ 
+\end_layout
+
+\begin_layout Standard
+fault tries to handle current instruciton and returns to same instruction.
+ need to make a good fault handler to avoid infinite looping
+\end_layout
+
+\begin_layout Standard
+aborts is where OS doesn't think it can recover
+\end_layout
+
+\begin_layout Standard
+double-fault abort.
+ in an interrupt, we get a fault trying to invoke said interrupt.
+ page fault error causes page fault error.
+ so this is more of an OS bug
+\end_layout
+
+\begin_layout Standard
+technically you can make a double-fault handler
+\end_layout
+
+\begin_layout Standard
+triple fault is when you fault in a double fault.
+ it usually requires a hardware reset, or let one core reset another core.
+ 
+\end_layout
+
+\begin_layout Standard
+old old multitasking was cooperative multitasking.
+ you have to give up processor during IO, but if you just did computations
+ and never yielded you could own the processor.
+ programs needed to be good citizens.
+ sometimes broken drivers casued OS to fail in like Win95
+\end_layout
+
+\begin_layout Standard
+hardware timer so we can force switching to another process.
+\end_layout
+
+\begin_layout Standard
+APIC, lets us configure the interrupts.
+ 
+\end_layout
+
+\begin_layout Standard
+interprocessor interrupts.
+ can have a processor kill another processor's process to top runaway processes.
+\end_layout
+
+\begin_layout Subsection*
+Common Structural Patterns
+\end_layout
+
+\begin_layout Standard
+separation of policy and mechanism.
+\end_layout
+
+\begin_layout Standard
+Policy is what should be done: e.g.
+ virtual memory paging, 
+\end_layout
+
+\begin_layout Standard
+Mechanism is how do I actually do those things
+\end_layout
+
+\begin_layout Standard
+mechanisms rarely change within a particular OS, but the philosophy, can
+ change in the OS configuration they change so often.
+\end_layout
+
+\begin_layout Standard
+DOS was bad because hardware wasn't designed to let good OS's run.
+ anything can talk to bios or hardware.
+ EVERYTHING can talk to hardware directly.
+ 
+\end_layout
+
+\begin_layout Standard
+applications would often need the full Mb of memory and issues could occur
+\end_layout
+
+\begin_layout Standard
+viruses could modify the interrupt vector table, and capture ALL interrupts,
+ intercept them and change what they do.
+ so they could cut out some memoryand own it.
+ and then capture interrupts and pass them to bios/hardware.
+ completely invisible.
+ modern hardwre prevents this problem
+\end_layout
+
+\begin_layout Standard
+UNIX was better made because many users.
+ eventually generated more structure, but the OS was all in kernel.
+ monolithic kernel -- everything is in kernel mode, but any bad code can
+ ruin the OS.linux is also monolithic.
+ but its super fast because trapping into kernel and context switches are
+ slow.
+\end_layout
+
+\begin_layout Standard
+layered structure was in THE operating system.
+ runs on mainframes.
+ six layers and each interacts only with the layer below it.
+ layer 0 interacts with hardware.
+ heavily tested his layers in order.
+ 
+\end_layout
+
+\begin_layout Standard
+monolithic kernels are hard to extend.
+ slow to compile, modern things are modular and load kernel modules to be
+ extended.
+\end_layout
+
+\begin_layout Standard
+monolithic, but also modular with these kernel modules.
+ some core services are always in.
+ only have drivers for things you need.
+\end_layout
+
+\begin_layout Part*
+Monday, January 11
+\end_layout
+
+\begin_layout Standard
+Still talking about OS design patterns.
+\end_layout
+
+\begin_layout Standard
+we want to separate policy and mechanism.
+ but this isn't always successful.
+\end_layout
+
+\begin_layout Subsection*
+Microkernels
+\end_layout
+
+\begin_layout Standard
+some things don't need to be in the kernel itsself.
+ process and context swithcing have to be in kernel mode, but not everything
+ does.
+ setting up interrupts, system call layer need to be in kernel mode.
+ this leads to the microkernel approach -- we take out as many OS processes
+ as possible and put those things in the usermode rather than kernel mode.
+ 
+\end_layout
+
+\begin_layout Standard
+Jochen Liedtke's minimality.
+ we only allow put things into the kernel if putting it outside would cause
+ problem (ie if there were competing implementation created in user mode).
+ e.g.
+ context swithcing need to be in kernel bc having two implenentations would
+ be a problem.
+\end_layout
+
+\begin_layout Standard
+memory and process abstraction, interprocess communications all need to
+ be in the kernel.
+ we want the kernel to be < 10k lines of code
+\end_layout
+
+\begin_layout Standard
+kernel has to deal with sharing resources, so we want io
+\end_layout
+
+\begin_layout Standard
+process scheduling could be in usermode, but context swithcing into and
+ out of kernel for processing is so expensive because of how often it occurs,
+ so thats often in kernel.
+\end_layout
+
+\begin_layout Standard
+the filesystem and the HDD driver are usermode processes.
+\end_layout
+
+\begin_layout Standard
+text editor asks microkernel to save a file, who asks the filesystem, who
+ goes to microkernel, who goes to the HDD driver.
+ and we need to go backwards through this chain when HDD is done.
+ this is going to be slower because more IPC messages than we would have
+ in a monolithic kernel.
+ messaging was a synchronous one way message.
+\end_layout
+
+\begin_layout Standard
+there are also multiple copies going on.
+\end_layout
+
+\begin_layout Standard
+microkernels, very reliable because small, can always restart the usermode
+ processes.
+ driver crashes won't kill your entire system.
+ having to restart can still cause problems, like dropped packets or file
+ system corruption.
+ still need to be careful.
+ need to make these usermode processes more resilient.
+ design systems so they have transactions.
+ thus failure isn't fatal.
+ not part of microkernel, but part of the usrmode processes that would go
+ with the kernel.
+\end_layout
+
+\begin_layout Standard
+there are performance issues with message passing.
+ we want to use synchronous messaging, but have to use asynchronous messaging
+ 
+\series bold
+why?
+\end_layout
+
+\begin_layout Standard
+in Mach processes have ports which tel lyou who can send them messages.
+ the messages would be structs of messages, who sent, who received, etc.
+\end_layout
+
+\begin_layout Standard
+one api call that sends the messages.
+ 
+\end_layout
+
+\begin_layout Standard
+who gets the right to write to the memory used for the message? we don't
+ want to copy the data every time.
+ however, we also don't want to overwrite the message before someone has
+ received it.
+\end_layout
+
+\begin_layout Standard
+non-kernel mode things don't always know what to do best.
+ can't tell who wants memory as well as monolithic can.
+ the pager fails in low memory becaues it can't see what it has to do very
+ well.
+ if we make it more sophisticated, then it will be even slower to send messages
+ to it, so it may as well be in the kernel.
+\end_layout
+
+\begin_layout Standard
+mach 4 starts putting things back into the kernel to speed it up.
+\end_layout
+
+\begin_layout Subsection*
+Liedtke and L4
+\end_layout
+
+\begin_layout Standard
+Liedtke claims that previous microkernels were just made poorly.
+\end_layout
+
+\begin_layout Standard
+he makes his own OS.
+ L4 is nice becuase it reduces copies of messages by having a single send
+ and receive system call.
+\end_layout
+
+\begin_layout Standard
+we just share the access space when A and B try to message each other
+\end_layout
+
+\begin_layout Standard
+most messages are exceedingly short, so we can pass the data in registers
+ rather than real messages which we only use when we need to.
+\end_layout
+
+\begin_layout Standard
+his message passing was more relaxed.
+\end_layout
+
+\begin_layout Standard
+more rleaxed boundaries between prcesses and kernel/user areas
+\end_layout
+
+\begin_layout Standard
+interesting, but not as safe or secure.
+\end_layout
+
+\begin_layout Subsection*
+Hybrid
+\end_layout
+
+\begin_layout Standard
+we start moving processes back into kernel to speed things back up.
+\end_layout
+
+\begin_layout Standard
+ChorusOS lets you choose whether some processes were in usermode or kernel
+ mode, more research based than actual though
+\end_layout
+
+\begin_layout Subsection*
+Exokernels
+\end_layout
+
+\begin_layout Standard
+what? what if the kernel didn't force us to use hardware in particualr ways
+\end_layout
+
+\begin_layout Standard
+lets applications manage hardware directly.
+ because the application knows better than the OS
+\end_layout
+
+\begin_layout Standard
+OS still guards which applications get time.
+ still allocates resources, but applications can access the HW resources
+ as they want.
+ 
+\end_layout
+
+\begin_layout Standard
+is orthoganal to monolithic vs microkernels though typically done by microkernel
+s.
+\end_layout
+
+\begin_layout Standard
+the hardware abstractions are usually found in libraries than run on top
+ of exokernel.
+ standard apis.
+ application can choose which library they want to use.
+ or even make up a new one.
+ very flexibile.
+\end_layout
+
+\begin_layout Standard
+we want to move multimedia stuff out of the kernel.
+ 
+\series bold
+why? 
+\series default
+they made an exokernel accidently because that's what happened when they
+ tried to move that out
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
 \end_body
 \end_document
